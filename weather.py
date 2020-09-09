@@ -1,9 +1,9 @@
-from convert import converter as con
+from convert import converter_farenheight as con
+from convert import converter_celcius as con_celcius
 import requests
-
-def get(city):
+import sys
+def get(city ,key):
     city = city.title()
-    key = "67f58722a81d7a2143da94ffe198c2d9"
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}"
     response = requests.get(url) # gets data from openweather api
 
@@ -12,9 +12,10 @@ def get(city):
         data = response.json()['main']
 
         temp = data['temp_max'] # gets temperature from data
-        temp = con(temp) # convert temp from kelvin to fahrenheit
+        temp_farenheight = con(temp) # convert temp from kelvin to fahrenheit
+        temp_celcuis = con_celcius(temp)
         humidity = data['humidity'] # gets humidity from data
-        ret = (temp, humidity) # packs temp and humidity into a tuple
+        ret = (temp_farenheight,temp_celcuis, humidity) # packs temp and humidity into a tuple
         
         return ret
 
