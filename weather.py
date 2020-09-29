@@ -2,6 +2,8 @@ from convert import converter_farenheight as con
 from convert import converter_celcius as con_celcius
 import requests
 import sys
+
+
 def get(city ,key):
     city = city.title()
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}"
